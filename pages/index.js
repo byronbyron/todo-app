@@ -2,6 +2,15 @@ import Head from 'next/head'
 import Image from 'next/image'
 
 export default function Home() {
+  const todos = [
+    {title: 'Complete online JavaScript course'},
+    {title: 'Jog around the park 3x'},
+    {title: '10 minutes meditation'},
+    {title: 'Read for 1 hour'},
+    {title: 'Pick up groceries'},
+    {title: 'Complete Todo App on Frontend Mentor'},
+  ]
+
   return (
     <div>
       <Head>
@@ -21,10 +30,24 @@ export default function Home() {
       </header>
 
       <main className="main container">
-        <form>
+        <form className="todo-form">
           <label htmlFor="todo" className="sr-only">Create a new todo</label>
-          <input type="text" name="todo" id="todo" placeholder="Create a new todo..." className="todo-item" />
+          <input type="text" name="todo" id="todo" placeholder="Create a new todo..." className="todo-input" />
         </form>
+
+        <ul className="todo-list">
+          {todos.map((todo, i) => {
+            return (
+              <li className="todo-item">
+                <button class="todo-btn">{todo.title}</button>
+                <button className="todo-delete">
+                  <span className="sr-only">Delete {todo.title}</span>
+                  <img src="/icon-cross.svg" alt="" />
+                </button>
+              </li>
+            );
+          })}
+        </ul>
 
         <div>
           <div>
