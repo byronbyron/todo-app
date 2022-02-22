@@ -1,16 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap');
+
+:root {
+  /* Primary */
+  --bright-blue: hsl(220, 98%, 61%);
+  --check-background: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%);
+
+  --c-background: hsl(235, 21%, 11%);
+  --c-title: hsl(0, 0%, 100%);
+}
+
+.theme-light {
+  --c-background: hsl(0, 0%, 98%);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+body {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 1rem;
+  min-height: 100vh;
+  background-color: var(--c-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, p {
+  margin-top: 0;
 }
 
 a {
-  color: inherit;
-  text-decoration: none;
 }
 
-* {
-  box-sizing: border-box;
+.container {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.header {
+  display: flex;
+  padding-top: 3rem;
+  padding-bottom: 1.8755rem;
+  background: url('/bg-mobile-dark.jpg') no-repeat left top var(--bright-blue);
+  height: 200px;
+}
+
+.title {
+  font-size: 1.625rem;
+  font-weight: 800;
+  margin-right: auto;
+  margin-bottom: 0;
+  color: var(--c-title);
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+}
+
+.btn-theme {
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+.btn-theme img {
+  display: block;
+  width: 1.25rem;
+}
+
+.main {
+
+}
+
+.todo-item {
+  width: 100%;
+  height: 3rem;
+  padding: 0.5rem 1rem;
+}
+
+.attribution {
+  font-size: 11px;
+  text-align: center;
+}
+
+.attribution a {
+  color: hsl(228, 45%, 44%);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
 }
