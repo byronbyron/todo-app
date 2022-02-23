@@ -20,52 +20,59 @@ export default function Home() {
       </Head>
 
       <header className="header container">
-        <h1 className="title">Todo</h1>
+        <div className="row">
+          <h1 className="title">Todo</h1>
 
-        <div>
-          <button className="btn-theme">
-            <img src="icon-sun.svg" alt="" />
-          </button>
+          <div>
+            <button className="btn-theme">
+              <img src="icon-sun.svg" alt="" />
+            </button>
+          </div>
         </div>
       </header>
 
       <main className="main container">
-        <form className="todo-form">
-          <label htmlFor="todo" className="sr-only">Create a new todo</label>
-          <input type="text" name="todo" id="todo" placeholder="Create a new todo..." className="todo-input" />
-        </form>
+        <div className="row">
+          <form className="todo-form">
+            <label htmlFor="todo" className="sr-only">Create a new todo</label>
+            <input type="text" name="todo" id="todo" placeholder="Create a new todo..." className="todo-input" />
+          </form>
 
-        <ul className="todo-list">
-          {todos.map((todo, i) => {
-            return (
-              <li className="todo-item">
-                <button class="todo-btn">{todo.title}</button>
-                <button className="todo-delete">
-                  <span className="sr-only">Delete {todo.title}</span>
-                  <img src="/icon-cross.svg" alt="" />
-                </button>
-              </li>
-            );
-          })}
-        </ul>
+          <ul className="todo-list">
+            {todos.map((todo, i) => {
+              return (
+                <li className="todo-item" key={i}>
+                  <input type="checkbox" name={`todo-${i}`} id={`todo-${i}`} className="todo-check sr-only" />
+                  <label htmlFor={`todo-${i}`} className="todo-label">
+                    {todo.title}
+                  </label>
+                  <button className="todo-delete">
+                    <span className="sr-only">Delete {todo.title}</span>
+                    <img src="/icon-cross.svg" alt="" />
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
 
-        <div>
-          <div>
-            <p>{/*Add dynamic number*/}5 items left</p>
+          <div className="todo-controls">
+            <div>
+              {/*Add dynamic number*/}5 items left
+            </div>
+
+            <div>
+              <button>Clear Completed</button>
+            </div>
           </div>
 
-          <div>
+          <div className="todo-filters">
             <button>All</button>
             <button>Active</button>
             <button>Completed</button>
           </div>
 
-          <div>
-            <button>Clear Completed</button>
-          </div>
+          <p>Drag and drop to reorder list</p>
         </div>
-
-        <p>Drag and drop to reorder list</p>
       </main>
 
       <footer>

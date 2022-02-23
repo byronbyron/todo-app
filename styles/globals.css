@@ -2,13 +2,16 @@
 
 :root {
   /* Primary */
-  --bright-blue: hsl(220, 98%, 61%);
-  --check-background: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%);
+  --c-bright-blue: hsl(220, 98%, 61%);
+  --c-check-background: linear-gradient(to right, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+
+  --c-title: hsl(0, 0%, 100%);
 
   --c-background: hsl(235, 21%, 11%);
-  --c-title: hsl(0, 0%, 100%);
   --c-todo-item: hsl(235, 24%, 19%);
   --c-todo-item-text: hsl(234, 39%, 85%);
+  --c-todo-input-text: hsl(234, 11%, 52%);
+  --c-todo-item-text-strike: hsl(233, 14%, 35%);
   --c-todo-item-text-hover: hsl(236, 33%, 92%);
   --c-todo-item-check-circle: hsl(237, 14%, 26%);
   --c-todo-item-border: hsl(237, 14%, 26%);
@@ -33,6 +36,7 @@ body {
 body {
   font-family: 'Josefin Sans', sans-serif;
   font-size: 1rem;
+  font-weight: 400;
   min-height: 100vh;
   background-color: var(--c-background);
   -webkit-font-smoothing: antialiased;
@@ -43,7 +47,10 @@ h1, p {
   margin-top: 0;
 }
 
-a {
+p {
+  font-size: 14px;
+  text-align: center;
+  color: var(--c-todo-input-text);
 }
 
 input,
@@ -56,12 +63,23 @@ button {
   padding-right: 1.5rem;
 }
 
+.row {
+  width: 100%;
+  max-width: 327px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .header {
-  display: flex;
   padding-top: 3rem;
   padding-bottom: 1.8755rem;
   background: url('/bg-mobile-dark.jpg') no-repeat left top;
+  background-size: cover;
   height: 200px;
+}
+
+.header .row {
+  display: flex;
 }
 
 .title {
@@ -88,6 +106,7 @@ button {
 
 .main {
   margin-top: -5.75rem;
+  padding-bottom: 3.5rem;
 }
 
 .todo-form {
@@ -98,9 +117,10 @@ button {
 .todo-input {
   font-size: 12px;
   width: 100%;
-  height: 3rem;
+  min-height: 3rem;
   border: 0;
   padding: 0.625rem 1rem 0.5rem 3.25rem;
+  color: var(--c-todo-input-text);
   background-color: var(--c-todo-item);
   border-radius: 0.375rem;
 }
@@ -110,7 +130,7 @@ button {
   padding: 0;
   list-style: none;
   background-color: var(--c-todo-item);
-  border-radius: 0.375rem;
+  border-radius: 0.375rem 0.375rem 0 0;
 }
 
 .todo-item {
@@ -118,11 +138,11 @@ button {
   position: relative;
 }
 
-.todo-item + .todo-item {
-  border-top: 1px solid var(--c-todo-item-border);
+.todo-item {
+  border-bottom: 1px solid var(--c-todo-item-border);
 }
 
-.todo-btn,
+.todo-label,
 .todo-delete {
   background: none;
   padding: 0;
@@ -130,8 +150,11 @@ button {
   color: var(--c-todo-item-text);
 }
 
-.todo-btn {
+.todo-label {
   font-size: 12px;
+  line-height: 1.4;
+  display: flex;
+  align-items: center;
   width: 100%;
   height: 3.25rem;
   border: 0;
@@ -142,7 +165,7 @@ button {
 }
 
 .todo-form::before,
-.todo-btn::before {
+.todo-label::before {
   content: '';
   width: 1.25rem;
   height: 1.25rem;
@@ -154,14 +177,31 @@ button {
   border-radius: 1.25rem;
 }
 
-.todo-btn:hover,
-.todo-btn:focus {
+.todo-check:checked + .todo-label {
+  text-decoration: line-through;
+  color: var(--c-todo-item-text-strike);
+}
+
+.todo-check:checked + .todo-label::before {
+  background: url('/icon-check.svg') no-repeat center, var(--c-check-background);
+}
+
+input:focus,
+button:focus,
+[type="checkbox"]:focus + .todo-label {
+  outline: 1px solid white;
+  box-shadow: inset 0 0 0 2px orange;
+  border-radius: 0.375rem;
+}
+
+.todo-label:hover,
+.todo-label:focus {
   color: var(--c-todo-item-text-hover);
 }
 
 .todo-delete {
   width: 3.25rem;
-  height: 3.25rem;
+  min-height: 3.25rem;
   color: var(--c-todo-item-text);
   position: absolute;
   top: 0;
@@ -173,6 +213,58 @@ button {
 
 .todo-delete img {
   width: 0.75rem;
+}
+
+.todo-controls {
+  font-size: 12px;
+  color: var(--c-todo-input-text);
+  background-color: var(--c-todo-item);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  min-height: 3.125rem;
+  padding: 0 0 0 1.25rem;
+  border-radius: 0 0 0.375rem 0.375rem;
+}
+
+.todo-controls > div:first-child {
+  margin-right: auto;
+}
+
+.todo-controls button,
+.todo-filters button {
+  font-size: 12px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--c-todo-input-text);
+}
+
+.todo-controls button {
+  padding: 1rem 1.25rem 1.125rem 1.25rem;
+}
+
+.todo-filters {
+  background-color: var(--c-todo-item);
+  border-radius: 0.375rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2.75rem;
+}
+
+.todo-filters button {
+  font-size: 14px;
+  padding: 1.125rem 0.625rem 0.875rem 0.625rem;
+}
+
+.todo-filters button:first-child {
+  color: var(--c-bright-blue);
+}
+
+footer {
+  display: none;
 }
 
 .attribution {
@@ -194,4 +286,14 @@ button {
   clip: rect(0,0,0,0);
   white-space: nowrap;
   border: 0;
+}
+
+@media (min-width: 768px) {
+  .header {
+    background-image: url('/bg-desktop-dark.jpg');
+  }
+
+  .row {
+    max-width: 540px;
+  }
 }
