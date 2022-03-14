@@ -3,8 +3,8 @@ import Image from 'next/image'
 export default function Todo({ todo, index, removeTodo, completeTodo }) {
   return (
     <li className="todo-item">
-      <input type="checkbox" name={`todo-${todo.id}`} id={`todo-${todo.id}`} className="todo-check sr-only" defaultChecked={todo.completed} onChange={() => completeTodo(index)} />
-      <label htmlFor={`todo-${todo.id}`} className="todo-label">
+      <input type="checkbox" name={`todo-${index}`} id={`todo-${index}`} className="todo-check sr-only" defaultChecked={todo.completed} onChange={() => completeTodo(index)} />
+      <label htmlFor={`todo-${index}`} className="todo-label">
         {todo.title}
       </label>
       <button className="todo-delete" onClick={() => removeTodo(index)}>
