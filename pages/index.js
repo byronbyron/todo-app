@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Head from 'next/head'
+import Image from 'next/image'
 import data from './data.json'
 import Todo from './Todo.js'
 
@@ -36,7 +37,7 @@ export default function Home() {
 
           <div>
             <button className="btn-theme">
-              <img src="icon-sun.svg" alt="" />
+              <Image src="/icon-sun.svg" alt="" width="20" height="20" />
             </button>
           </div>
         </div>
