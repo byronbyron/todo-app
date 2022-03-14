@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
-import data from './data.json'
-import Todo from './components/Todo.js'
+import data from '../data.json'
+import Todo from '../components/Todo.js'
 
 export default function Home() {
 
