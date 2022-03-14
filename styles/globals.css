@@ -170,10 +170,6 @@ button {
   color: var(--c-todo-item-text-hover);
 }
 
-.todo-delete svg {
-  display: block;
-}
-
 .todo-delete:hover {
   filter: brightness(150%);
 }
