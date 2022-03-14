@@ -1,15 +1,11 @@
+import React, { useState } from 'react';
+import data from "./data.json";
 import Head from 'next/head'
 import Image from 'next/image'
 
 export default function Home() {
-  const todos = [
-    {title: 'Complete online JavaScript course'},
-    {title: 'Jog around the park 3x'},
-    {title: '10 minutes meditation'},
-    {title: 'Read for 1 hour'},
-    {title: 'Pick up groceries'},
-    {title: 'Complete Todo App on Frontend Mentor'},
-  ]
+
+  const [ todos, setTodos ] = useState(data);
 
   return (
     <div>
