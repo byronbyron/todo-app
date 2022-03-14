@@ -5,8 +5,8 @@ import data from '../data.json'
 import Todo from '../components/Todo.js'
 
 export default function Home() {
-
   const [ todos, setTodos ] = useState(data);
+  const [ value, setValue ] = useState('');
 
   const addTodo = (e) => {
     e.preventDefault();
@@ -21,7 +21,16 @@ export default function Home() {
 
     const newTodos = [...todos, { ...newTodo }];
     setTodos(newTodos);
+    setValue('');
   };
+
+  const markTodo = () => {
+
+  }
+
+  const removeTodo = (e) => {
+    console.log(e)
+  }
 
   return (
     <div>
@@ -47,13 +56,19 @@ export default function Home() {
         <div className="row">
           <form className="todo-form" onSubmit={addTodo}>
             <label htmlFor="todo" className="sr-only">Create a new todo</label>
-            <input type="text" name="todo" id="todo" placeholder="Create a new todo..." className="todo-input" />
+            <input type="text" name="todo" id="todo" placeholder="Create a new todo..." className="todo-input" value={value} onChange={e => setValue(e.target.value)} />
           </form>
 
           <ul className="todo-list">
-            {todos.map((todo, i) => {
+            {todos.map((todo, index) => {
               return (
-                <Todo todo={todo} key={i} />
+                <Todo
+                  key={index}
+                  index={index}
+                  todo={todo}
+                  markTodo={markTodo}
+                  removeTodo={removeTodo}
+                />
               );
             })}
           </ul>
