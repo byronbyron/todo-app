@@ -28,8 +28,10 @@ export default function Home() {
 
   }
 
-  const removeTodo = (e) => {
-    console.log(e)
+  const removeTodo = (index) => {
+    const newTodos = [...todos];
+    newTodos.splice(index, 1);
+    setTodos(newTodos);
   }
 
   return (
