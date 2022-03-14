@@ -1,9 +1,9 @@
 import Image from 'next/image'
 
-export default function Todo({ todo, index, removeTodo }) {
+export default function Todo({ todo, index, removeTodo, completeTodo }) {
   return (
     <li className="todo-item">
-      <input type="checkbox" name={`todo-${todo.id}`} id={`todo-${todo.id}`} className="todo-check sr-only" defaultChecked={todo.completed} />
+      <input type="checkbox" name={`todo-${todo.id}`} id={`todo-${todo.id}`} className="todo-check sr-only" defaultChecked={todo.completed} onChange={() => completeTodo(index)} />
       <label htmlFor={`todo-${todo.id}`} className="todo-label">
         {todo.title}
       </label>

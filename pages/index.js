@@ -24,8 +24,10 @@ export default function Home() {
     setValue('');
   };
 
-  const markTodo = () => {
-
+  const completeTodo = (index) => {
+    const newTodos = [...todos];
+    newTodos[index].completed = true;
+    setTodos(newTodos);
   }
 
   const removeTodo = (index) => {
@@ -68,7 +70,7 @@ export default function Home() {
                   key={index}
                   index={index}
                   todo={todo}
-                  markTodo={markTodo}
+                  completeTodo={completeTodo}
                   removeTodo={removeTodo}
                 />
               );
