@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 export default function Todo({todo}) {
   return (
     <li className="todo-item" key={todo.id}>
@@ -7,7 +9,7 @@ export default function Todo({todo}) {
       </label>
       <button className="todo-delete">
         <span className="sr-only">Delete {todo.title}</span>
-        <img src="/icon-cross.svg" alt="" />
+        <Image src="/icon-cross.svg" alt="" width={12} height={12} />
       </button>
     </li>
   )

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import Head from 'next/head'
-import data from "./data.json";
+import data from './data.json'
 import Todo from './Todo.js'
 
 export default function Home() {
