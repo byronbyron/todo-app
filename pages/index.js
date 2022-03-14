@@ -1,11 +1,26 @@
 import React, { useState } from 'react';
-import data from "./data.json";
 import Head from 'next/head'
-import Image from 'next/image'
+import data from "./data.json";
+import Todo from './Todo.js'
 
 export default function Home() {
 
   const [ todos, setTodos ] = useState(data);
+
+  const addTodo = (e) => {
+    e.preventDefault();
+
+    if (e.target.todo.value === '') return;
+
+    const newTodo = {
+      id: todos.length + 1,
+      title: e.target.todo.value,
+      completed: false
+    }
+
+    const newTodos = [...todos, { ...newTodo }];
+    setTodos(newTodos);
+  };
 
   return (
     <div>
@@ -29,7 +44,7 @@ export default function Home() {
 
       <main className="main container">
         <div className="row">
-          <form className="todo-form">
+          <form className="todo-form" onSubmit={addTodo}>
             <label htmlFor="todo" className="sr-only">Create a new todo</label>
             <input type="text" name="todo" id="todo" placeholder="Create a new todo..." className="todo-input" />
           </form>
@@ -37,23 +52,14 @@ export default function Home() {
           <ul className="todo-list">
             {todos.map((todo, i) => {
               return (
-                <li className="todo-item" key={i}>
-                  <input type="checkbox" name={`todo-${i}`} id={`todo-${i}`} className="todo-check sr-only" />
-                  <label htmlFor={`todo-${i}`} className="todo-label">
-                    {todo.title}
-                  </label>
-                  <button className="todo-delete">
-                    <span className="sr-only">Delete {todo.title}</span>
-                    <img src="/icon-cross.svg" alt="" />
-                  </button>
-                </li>
+                <Todo todo={todo} key={i} />
               );
             })}
           </ul>
 
           <div className="todo-controls">
             <div>
-              {/*Add dynamic number*/}5 items left
+              {todos.length} items left
             </div>
 
             <div>
