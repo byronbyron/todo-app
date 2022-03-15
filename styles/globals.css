@@ -244,6 +244,7 @@ button:focus,
   border: 0;
   background: none;
   color: var(--c-todo-input-text);
+  cursor: pointer;
 }
 
 .todo-controls button {

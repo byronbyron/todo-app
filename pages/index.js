@@ -21,17 +21,22 @@ export default function Home() {
     setTodos(updatedTodo);
   }
 
-
   function removeTodo(id) {
     const remainingTodos = todos.filter(todo => id !== todo.id);
-    
+
     setTodos(remainingTodos);
   }
 
   function addTask(value) {
     const newTodo = { id: todos.length + 1, title: value, completed: false };
-    
+
     setTodos([...todos, newTodo]);
+  }
+
+  function clearCompletedTodos() {
+    const completedTodos = todos.filter(todo => !todo.completed);
+    
+    setTodos(completedTodos);
   }
 
   return (
@@ -77,7 +82,7 @@ export default function Home() {
             </div>
 
             <div>
-              <button>Clear Completed</button>
+              <button onClick={clearCompletedTodos}>Clear Completed</button>
             </div>
           </div>
 
