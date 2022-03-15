@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import Head from 'next/head'
-import Image from 'next/image'
 import data from '../data.json'
 import Todo from '../components/Todo.js'
 import TodoForm from '../components/TodoForm.js'
+import ThemeButton from '../components/ThemeButton.js'
 import FilterButton from '../components/FilterButton.js'
 
 export default function Home() {
@@ -59,7 +59,7 @@ export default function Home() {
   ));
 
   return (
-    <div>
+    <div className="wrapper">
       <Head>
         <title>Frontend Mentor | Todo app</title>
         <meta name="description" content="Todo app" />
@@ -71,9 +71,7 @@ export default function Home() {
           <h1 className="title">Todo</h1>
 
           <div>
-            <button className="btn-theme">
-              <Image src="/icon-sun.svg" alt="" width="20" height="20" />
-            </button>
+            <ThemeButton />
           </div>
         </div>
       </header>

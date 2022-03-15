@@ -17,8 +17,15 @@
   --c-todo-item-border: hsl(237, 14%, 26%);
 }
 
-.theme-light {
+.light {
   --c-background: hsl(0, 0%, 98%);
+  --c-todo-item: hsl(0, 0%, 100%);
+  --c-todo-item-text: hsl(235, 19%, 35%);
+  --c-todo-input-text: hsl(237, 14%, 26%);
+  --c-todo-item-text-strike: hsl(234, 39%, 85%);
+  --c-todo-item-text-hover: hsl(237, 14%, 26%);
+  --c-todo-item-check-circle: hsl(234, 39%, 85%);
+  --c-todo-item-border: hsl(236, 33%, 92%);
 }
 
 *,
@@ -41,6 +48,7 @@ body {
   background-color: var(--c-background);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.15s;
 }
 
 h1, p {
@@ -51,6 +59,7 @@ p {
   font-size: 14px;
   text-align: center;
   color: var(--c-todo-input-text);
+  transition: color 0.15s;
 }
 
 input,
@@ -76,6 +85,11 @@ button {
   background: url('/bg-mobile-dark.jpg') no-repeat left top;
   background-size: cover;
   height: 200px;
+  transition: background-image 0.15s;
+}
+
+.light .header {
+  background-image: url('/bg-mobile-light.jpg');
 }
 
 .header .row {
@@ -98,11 +112,29 @@ button {
   border: 0;
   background: none;
   cursor: pointer;
+  position: relative;
 }
 
 .btn-theme img {
   display: block;
   width: 1.25rem;
+}
+
+.btn-icon {
+  display: flex;
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
+}
+
+.btn-icon > span {
+  flex: 1 0 20px;
+  max-width: 20px;
+  transition: transform 0.15s;
+}
+
+.light .btn-icon > span {
+  transform: translate3d(-20px, 0, 0);
 }
 
 .main {
@@ -124,6 +156,7 @@ button {
   color: var(--c-todo-input-text);
   background-color: var(--c-todo-item);
   border-radius: 0.375rem;
+  transition: color 0.15s, background-color 0.15s;
 }
 
 .todo-list {
@@ -132,6 +165,8 @@ button {
   list-style: none;
   background-color: var(--c-todo-item);
   border-radius: 0.375rem 0.375rem 0 0;
+  min-height: 4rem;
+  transition: background-color 0.15s;
 }
 
 .todo-item {
@@ -141,6 +176,12 @@ button {
 
 .todo-item {
   border-bottom: 1px solid var(--c-todo-item-border);
+  transition: border-color 0.15s;
+}
+
+.todo-item:first-child {
+  border-radius: 0.375rem 0.375rem 0 0;
+  overflow: hidden;
 }
 
 .todo-label,
@@ -150,6 +191,7 @@ button {
   border: 0;
   color: var(--c-todo-item-text);
   cursor: pointer;
+  transition: color 0.15s;
 }
 
 .todo-label {
@@ -162,8 +204,8 @@ button {
   border: 0;
   padding: 0.625rem 3rem 0.5rem 3.25rem;
   background-color: var(--c-todo-item);
-  border-radius: 0.375rem;
   text-align: left;
+  transition: color 0.15s, background-color 0.15s;
 }
 
 .todo-label:hover {
@@ -185,6 +227,7 @@ button {
   transform: translateY(-50%);
   border: 1px solid var(--c-todo-item-check-circle);
   border-radius: 1.25rem;
+  transition: border-color 0.15s;
 }
 
 .todo-check:checked + .todo-label {
@@ -215,6 +258,7 @@ button:focus,
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: color 0.15s;
 }
 
 .todo-delete img {
@@ -231,6 +275,7 @@ button:focus,
   min-height: 3.125rem;
   padding: 0 0 0 1.25rem;
   border-radius: 0 0 0.375rem 0.375rem;
+  transition: color 0.15s, background-color 0.15s;
 }
 
 .todo-controls > div:first-child {
@@ -245,6 +290,7 @@ button:focus,
   background: none;
   color: var(--c-todo-input-text);
   cursor: pointer;
+  transition: color 0.15s;
 }
 
 .todo-controls button {
@@ -259,6 +305,7 @@ button:focus,
   align-items: center;
   justify-content: center;
   margin-bottom: 2.75rem;
+  transition: background-color 0.15s;
 }
 
 .todo-filters button {
@@ -300,6 +347,10 @@ footer {
     background-image: url('/bg-desktop-dark.jpg');
     height: 300px;
     padding-top: 78px;
+  }
+
+  .light .header {
+    background-image: url('/bg-desktop-light.jpg');
   }
 
   .row {
