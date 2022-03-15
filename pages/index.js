@@ -3,37 +3,35 @@ import Head from 'next/head'
 import Image from 'next/image'
 import data from '../data.json'
 import Todo from '../components/Todo.js'
+import TodoForm from '../components/TodoForm.js'
 
 export default function Home() {
   const [ todos, setTodos ] = useState(data);
-  const [ value, setValue ] = useState('');
 
-  const addTodo = (e) => {
-    e.preventDefault();
+  const itemsNoun = todos.length !== 1 ? 'items' : 'item';
 
-    if (e.target.todo.value === '') return;
+  function toggleCompletedTodo(id) {
+    const updatedTodo = todos.map(todo => {
+      if (id === todo.id) {
+        return {...todo, completed: !todo.completed}
+      }
+      return todo;
+    });
 
-    const newTodo = {
-      id: todos.length + 1,
-      title: e.target.todo.value,
-      completed: false
-    }
-
-    const newTodos = [...todos, { ...newTodo }];
-    setTodos(newTodos);
-    setValue('');
-  };
-
-  const completeTodo = (index) => {
-    const newTodos = [...todos];
-    newTodos[index].completed = true;
-    setTodos(newTodos);
+    setTodos(updatedTodo);
   }
 
-  const removeTodo = (index) => {
-    const newTodos = [...todos];
-    newTodos.splice(index, 1);
-    setTodos(newTodos);
+
+  function removeTodo(id) {
+    const remainingTodos = todos.filter(todo => id !== todo.id);
+    
+    setTodos(remainingTodos);
+  }
+
+  function addTask(value) {
+    const newTodo = { id: todos.length + 1, title: value, completed: false };
+    
+    setTodos([...todos, newTodo]);
   }
 
   return (
@@ -58,20 +56,16 @@ export default function Home() {
 
       <main className="main container">
         <div className="row">
-          <form className="todo-form" onSubmit={addTodo}>
-            <label htmlFor="todo" className="sr-only">Create a new todo</label>
-            <input type="text" name="todo" id="todo" placeholder="Create a new todo..." className="todo-input" value={value} onChange={e => setValue(e.target.value)} />
-          </form>
+          <TodoForm addTask={addTask} />
 
           <ul className="todo-list">
-            {todos.map((todo, index) => {
+            {todos.map((todo) => {
               return (
                 <Todo
-                  key={index}
-                  index={index}
                   todo={todo}
-                  completeTodo={completeTodo}
+                  toggleCompletedTodo={toggleCompletedTodo}
                   removeTodo={removeTodo}
+                  key={todo.id}
                 />
               );
             })}
@@ -79,7 +73,7 @@ export default function Home() {
 
           <div className="todo-controls">
             <div>
-              {todos.length} items left
+              {todos.length} {itemsNoun} left
             </div>
 
             <div>
