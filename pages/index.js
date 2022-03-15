@@ -4,11 +4,21 @@ import Image from 'next/image'
 import data from '../data.json'
 import Todo from '../components/Todo.js'
 import TodoForm from '../components/TodoForm.js'
+import FilterButton from '../components/FilterButton.js'
 
 export default function Home() {
   const [ todos, setTodos ] = useState(data);
+  const [ filter, setFilter ] = useState('All');
 
   const itemsNoun = todos.length !== 1 ? 'items' : 'item';
+
+  const FILTER_MAP = {
+    All: () => true,
+    Active: task => !task.completed,
+    Completed: task => task.completed
+  };
+
+  const FILTER_NAMES = Object.keys(FILTER_MAP);
 
   function toggleCompletedTodo(id) {
     const updatedTodo = todos.map(todo => {
@@ -39,6 +49,15 @@ export default function Home() {
     setTodos(completedTodos);
   }
 
+  const filterList = FILTER_NAMES.map(name => (
+    <FilterButton
+      key={name}
+      name={name}
+      isPressed={name === filter}
+      setFilter={setFilter}
+    />
+  ));
+
   return (
     <div>
       <Head>
@@ -64,7 +83,7 @@ export default function Home() {
           <TodoForm addTask={addTask} />
 
           <ul className="todo-list">
-            {todos.map((todo) => {
+            {todos.filter(FILTER_MAP[filter]).map((todo) => {
               return (
                 <Todo
                   todo={todo}
@@ -87,9 +106,7 @@ export default function Home() {
           </div>
 
           <div className="todo-filters">
-            <button>All</button>
-            <button>Active</button>
-            <button>Completed</button>
+            {filterList}
           </div>
 
           <p>Drag and drop to reorder list</p>
