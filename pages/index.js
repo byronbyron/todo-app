@@ -98,6 +98,10 @@ export default function Home() {
               {todos.length} {itemsNoun} left
             </div>
 
+            <div className="todo-filters">
+              {filterList}
+            </div>
+
             <div>
               <button onClick={clearCompletedTodos}>Clear Completed</button>
             </div>

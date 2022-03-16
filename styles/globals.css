@@ -2,7 +2,7 @@
 
 :root {
   /* Primary */
-  --c-bright-blue: hsl(220, 98%, 61%);
+  --c-bright-blue: hsl(220, 98%, 56%);
   --c-check-background: linear-gradient(120deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
 
   --c-title: hsl(0, 0%, 100%);
@@ -212,6 +212,10 @@ button {
   color: var(--c-todo-item-text-hover);
 }
 
+.todo-delete svg {
+  transform: scale3d(0.6666, 0.6666, 1);
+}
+
 .todo-delete:hover {
   filter: brightness(150%);
 }
@@ -276,6 +280,10 @@ button:focus,
   padding: 0 0 0 1.25rem;
   border-radius: 0 0 0.375rem 0.375rem;
   transition: color 0.15s, background-color 0.15s;
+}
+
+.todo-controls .todo-filters {
+  display: none;
 }
 
 .todo-controls > div:first-child {
@@ -401,6 +409,39 @@ footer {
   .todo-delete {
     width: 4rem;
     height: 4rem;
+  }
+
+  .todo-filters {
+    display: none;
+  }
+
+  .todo-controls .todo-filters {
+    display: flex;
+    margin-bottom: 0
+  }
+
+  .todo-controls {
+    padding: 0;
+    justify-content: center;
+    position: relative;
+  }
+
+  .todo-controls > div:first-child {
+    margin-right: 0;
+    padding: 1.25rem 1.25rem 1rem 1.25rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .todo-controls > div:last-child {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .todo-controls button {
+    padding: 1.25rem 1.25rem 1rem 1.25rem;
   }
 
 }
