@@ -167,6 +167,14 @@ button {
   box-shadow: 0 2rem 3rem -1rem hsl(220 98% 26% / 15%);
 }
 
+.todo-form {
+  box-shadow: 0 1.5rem 3rem -1rem hsl(0deg 0% 0% / 70%);
+}
+
+.light .todo-form {
+  box-shadow: 0 1.5rem 3rem -1rem hsl(0deg 0% 100% / 40%);
+}
+
 .todo-list {
   margin: 0;
   padding: 0;
@@ -415,14 +423,6 @@ footer {
 
   .main {
     margin-top: -8.875rem;
-  }
-
-  .todo-form {
-    box-shadow: 0 1.5rem 3rem -1rem hsl(0deg 0% 0% / 70%);
-  }
-
-  .light .todo-form {
-    box-shadow: 0 1.5rem 3rem -1rem hsl(0deg 0% 100% / 40%);
   }
 
   .todo-input {
