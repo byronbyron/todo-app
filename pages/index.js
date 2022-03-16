@@ -80,35 +80,38 @@ export default function Home() {
         <div className="row">
           <TodoForm addTask={addTask} />
 
-          <ul className="todo-list">
-            {todos.filter(FILTER_MAP[filter]).map((todo) => {
-              return (
-                <Todo
-                  todo={todo}
-                  toggleCompletedTodo={toggleCompletedTodo}
-                  removeTodo={removeTodo}
-                  key={todo.id}
-                />
-              );
-            })}
-          </ul>
+          <div className="todo-wrapper">
+            
+            <ul className="todo-list">
+              {todos.filter(FILTER_MAP[filter]).map((todo) => {
+                return (
+                  <Todo
+                    todo={todo}
+                    toggleCompletedTodo={toggleCompletedTodo}
+                    removeTodo={removeTodo}
+                    key={todo.id}
+                  />
+                );
+              })}
+            </ul>
 
-          <div className="todo-controls">
-            <div>
-              {todos.length} {itemsNoun} left
+            <div className="todo-controls">
+              <div>
+                {todos.length} {itemsNoun} left
+              </div>
+
+              <div className="todo-filters">
+                {filterList}
+              </div>
+
+              <div>
+                <button onClick={clearCompletedTodos}>Clear Completed</button>
+              </div>
             </div>
 
             <div className="todo-filters">
               {filterList}
             </div>
-
-            <div>
-              <button onClick={clearCompletedTodos}>Clear Completed</button>
-            </div>
-          </div>
-
-          <div className="todo-filters">
-            {filterList}
           </div>
 
           <p>Drag and drop to reorder list</p>

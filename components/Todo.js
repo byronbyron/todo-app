@@ -5,6 +5,7 @@ export default function Todo({ todo, removeTodo, toggleCompletedTodo }) {
     <li className="todo-item">
       <input type="checkbox" name={`todo-${todo.id}`} id={`todo-${todo.id}`} className="todo-check sr-only" defaultChecked={todo.completed} onChange={() => toggleCompletedTodo(todo.id)} />
       <label htmlFor={`todo-${todo.id}`} className="todo-label">
+        <span className="todo-check-circle"></span>
         {todo.title}
       </label>
       <button className="todo-delete" onClick={() => removeTodo(todo.id)}>
