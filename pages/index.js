@@ -1,14 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import data from '../data.json'
 import Todo from '../components/Todo.js'
 import TodoForm from '../components/TodoForm.js'
 import ThemeButton from '../components/ThemeButton.js'
 import FilterButton from '../components/FilterButton.js'
+import { ReactSortable } from "react-sortablejs"
+import { nanoid } from 'nanoid'
 
 export default function Home() {
   const [ todos, setTodos ] = useState(data);
   const [ filter, setFilter ] = useState('All');
+
+  useEffect(() => {
+    const localTodos = JSON.parse(localStorage.getItem('todos'));
+
+    if (localTodos !== null) {
+      setTodos(localTodos);
+    }
+  }, []);
 
   const itemsNoun = todos.length !== 1 ? 'items' : 'item';
 
@@ -29,24 +39,28 @@ export default function Home() {
     });
 
     setTodos(updatedTodo);
+    updateLocalStorage(updatedTodo);
   }
 
   function removeTodo(id) {
     const remainingTodos = todos.filter(todo => id !== todo.id);
 
     setTodos(remainingTodos);
+    updateLocalStorage(remainingTodos);
   }
 
   function addTask(value) {
-    const newTodo = { id: todos.length + 1, title: value, completed: false };
+    const newTodo = { id: nanoid(), title: value, completed: false };
 
     setTodos([...todos, newTodo]);
+    updateLocalStorage([...todos, newTodo]);
   }
 
   function clearCompletedTodos() {
     const completedTodos = todos.filter(todo => !todo.completed);
     
     setTodos(completedTodos);
+    updateLocalStorage(completedTodos);
   }
 
   const filterList = FILTER_NAMES.map(name => (
@@ -57,6 +71,14 @@ export default function Home() {
       setFilter={setFilter}
     />
   ));
+
+  function updateLocalStorage(todoList) {
+    localStorage.setItem('todos', JSON.stringify(todoList));
+  }
+
+  function handleOnDrop(result) {
+    updateLocalStorage(todos);
+  }
 
   return (
     <div className="wrapper">
@@ -81,8 +103,13 @@ export default function Home() {
           <TodoForm addTask={addTask} />
 
           <div className="todo-wrapper">
-            
-            <ul className="todo-list">
+            <ReactSortable
+              tag="ul"
+              list={todos}
+              setList={setTodos}
+              onEnd={handleOnDrop}
+              className="todo-list"
+            >
               {todos.filter(FILTER_MAP[filter]).map((todo) => {
                 return (
                   <Todo
@@ -93,7 +120,7 @@ export default function Home() {
                   />
                 );
               })}
-            </ul>
+            </ReactSortable>
 
             <div className="todo-controls">
               <div>
