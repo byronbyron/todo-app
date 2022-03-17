@@ -84,8 +84,6 @@ export default function Home() {
     <div className="wrapper">
       <Head>
         <title>Frontend Mentor | Todo app</title>
-        <meta name="description" content="Todo app" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
       </Head>
 
       <header className="header container">
