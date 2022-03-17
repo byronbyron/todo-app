@@ -11,16 +11,8 @@ import { nanoid } from 'nanoid'
 export default function Home() {
   const [ todos, setTodos ] = useState(data);
   const [ filter, setFilter ] = useState('All');
-
-  useEffect(() => {
-    const localTodos = JSON.parse(localStorage.getItem('todos'));
-
-    if (localTodos !== null) {
-      setTodos(localTodos);
-    }
-  }, []);
-
   const itemsNoun = todos.length !== 1 ? 'items' : 'item';
+  const uncompletedTodos = todos.filter(todo => todo.completed !== true);
 
   const FILTER_MAP = {
     All: () => true,
@@ -29,6 +21,14 @@ export default function Home() {
   };
 
   const FILTER_NAMES = Object.keys(FILTER_MAP);
+
+  useEffect(() => {
+    const localTodos = JSON.parse(localStorage.getItem('todos'));
+
+    if (localTodos !== null) {
+      setTodos(localTodos);
+    }
+  }, []);
 
   function toggleCompletedTodo(id) {
     const updatedTodo = todos.map(todo => {
@@ -124,7 +124,7 @@ export default function Home() {
 
             <div className="todo-controls">
               <div>
-                {todos.length} {itemsNoun} left
+                {uncompletedTodos.length} {itemsNoun} left
               </div>
 
               <div className="todo-filters">
