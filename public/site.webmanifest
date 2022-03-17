@@ -1,6 +1,7 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "todo-app-main",
+    "short_name": "todo-app",
+    "start_url": "https://todo-app-pied-five.vercel.app/",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
